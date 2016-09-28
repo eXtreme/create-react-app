@@ -71,7 +71,7 @@ module.exports = {
 // @remove-on-eject-end
 
 // @remove-on-publish-begin
-module.exports = {
+/*module.exports = {
   appBuild: resolveOwn('../../../build'),
   appPublic: resolveOwn('../template/public'),
   appHtml: resolveOwn('../template/public/index.html'),
@@ -82,5 +82,5 @@ module.exports = {
   appNodeModules: resolveOwn('../node_modules'),
   ownNodeModules: resolveOwn('../node_modules'),
   nodePaths: nodePaths
-};
+};*/
 // @remove-on-publish-end
