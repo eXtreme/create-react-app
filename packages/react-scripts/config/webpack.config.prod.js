@@ -12,6 +12,8 @@
 var path = require('path');
 var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
+var nesting = require('postcss-nesting');
+var cssvariables = require('postcss-css-variables');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
@@ -127,6 +129,10 @@ module.exports = {
         },
         // @remove-on-eject-end
       },
+      {
+        test: /\.module\.css/,
+        loader: ExtractTextPlugin.extract('style', 'css?modules!postcss')
+      },
       // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.
       // "css" loader resolves paths in CSS and adds assets as dependencies.
@@ -191,6 +197,8 @@ module.exports = {
   // We use PostCSS for autoprefixing only.
   postcss: function() {
     return [
+      nesting,
+      cssvariables,
       autoprefixer({
         browsers: [
           '>1%',
