@@ -14,6 +14,7 @@ var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var nesting = require('postcss-nesting');
 var cssvariables = require('postcss-css-variables');
+var values = require('postcss-modules-values');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
@@ -130,7 +131,7 @@ module.exports = {
         // @remove-on-eject-end
       },
       {
-        test: /\.module\.css/,
+        test: /\.pcss/,
         loader: ExtractTextPlugin.extract('style', 'css?modules!postcss')
       },
       // The notation here is somewhat confusing.
@@ -207,6 +208,7 @@ module.exports = {
           'not ie < 9', // React doesn't support IE8 anyway
         ]
       }),
+      values
     ];
   },
   plugins: [
@@ -258,7 +260,9 @@ module.exports = {
       }
     }),
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
-    new ExtractTextPlugin('static/css/[name].[contenthash:8].css')
+    new ExtractTextPlugin('static/css/[name].[contenthash:8].css', {
+      allChunks: true
+    })
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

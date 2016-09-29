@@ -14,6 +14,7 @@ var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var nesting = require('postcss-nesting');
 var cssvariables = require('postcss-css-variables');
+var values = require('postcss-modules-values');
 var findCacheDir = require('find-cache-dir');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
@@ -133,7 +134,7 @@ module.exports = {
         }
       },
       {
-        test: /\.module\.css$/,
+        test: /\.pcss$/,
         loaders: [
           'style?sourceMap',
           'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
@@ -197,6 +198,7 @@ module.exports = {
           'not ie < 9', // React doesn't support IE8 anyway
         ]
       }),
+      values
     ];
   },
   plugins: [
