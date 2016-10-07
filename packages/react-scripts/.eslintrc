@@ -1,3 +1,10 @@
 {
-  "extends": "react-app"
+  "extends": "react-app",
+  "rules": {
+    "indent": ["warn", 4, { "SwitchCase": 1 }],
+    "linebreak-style": ["error", "unix"],
+    "comma-dangle": ["warn", "always-multiline"],
+    "new-cap": ["warn", { "newIsCap": true, "capIsNewExceptions": ["CSSModules"] }],
+    "react/react-in-jsx-scope": "error"
+  }
 }
