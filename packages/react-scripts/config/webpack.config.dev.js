@@ -15,7 +15,6 @@ var webpack = require('webpack');
 var nesting = require('postcss-nesting');
 var cssvariables = require('postcss-css-variables');
 var values = require('postcss-modules-values');
-var findCacheDir = require('find-cache-dir');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
@@ -125,12 +124,9 @@ module.exports = {
           presets: [require.resolve('babel-preset-react-app')],
           // @remove-on-eject-end
           // This is a feature of `babel-loader` for webpack (not Babel itself).
-          // It enables caching results in ./node_modules/.cache/react-scripts/
-          // directory for faster rebuilds. We use findCacheDir() because of:
-          // https://github.com/facebookincubator/create-react-app/issues/483
-          cacheDirectory: findCacheDir({
-            name: 'react-scripts'
-          })
+          // It enables caching results in ./node_modules/.cache/babel-loader/
+          // directory for faster rebuilds.
+          cacheDirectory: true
         }
       },
       {
