@@ -136,6 +136,7 @@ module.exports = {
           /\.html$/,
           /\.(js|jsx)$/,
           /\.pcss$/,
+          /\.less$/,
           /\.css$/,
           /\.json$/
         ],
