@@ -24,7 +24,6 @@ var path = require('path');
 var pathExists = require('path-exists');
 var filesize = require('filesize');
 var gzipSize = require('gzip-size').sync;
-var rimrafSync = require('rimraf').sync;
 var webpack = require('webpack');
 var config = require('../config/webpack.config.prod');
 var paths = require('../config/paths');
@@ -78,7 +77,7 @@ recursive(paths.appBuild, (err, fileNames) => {
 
   // Remove all content but keep the directory so that
   // if you're in it, you don't end up in Trash
-  rimrafSync(paths.appBuild + '/*');
+  fs.emptyDirSync(paths.appBuild);
 
   // Start the webpack build
   build(previousSizeMap);
@@ -145,6 +144,11 @@ function build(previousSizeMap) {
       process.exit(1);
     }
 
+    if (process.env.CI && stats.compilation.warnings.length) {
+     printErrors('Failed to compile.', stats.compilation.warnings);
+     process.exit(1);
+   }
+
     console.log(chalk.green('Compiled successfully.'));
     console.log();
 
@@ -165,7 +169,7 @@ function build(previousSizeMap) {
       console.log('To publish it at ' + chalk.green(homepagePath) + ', run:');
       console.log();
       if (useYarn) {
-        console.log('  ' + chalk.cyan('yarn') +  ' add gh-pages');
+        console.log('  ' + chalk.cyan('yarn') +  ' add --dev gh-pages');
       } else {
         console.log('  ' + chalk.cyan('npm') +  ' install --save-dev gh-pages');
       }
@@ -175,7 +179,7 @@ function build(previousSizeMap) {
       console.log('    ' + chalk.dim('// ...'));
       console.log('    ' + chalk.yellow('"scripts"') + ': {');
       console.log('      ' + chalk.dim('// ...'));
-      console.log('      ' + chalk.yellow('"deploy"') + ': ' + chalk.yellow('"gh-pages -d build"'));
+      console.log('      ' + chalk.yellow('"deploy"') + ': ' + chalk.yellow('"npm run build&&gh-pages -d build"'));
       console.log('    }');
       console.log();
       console.log('Then run:');
