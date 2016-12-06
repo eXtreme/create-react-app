@@ -88,6 +88,5 @@ if (__dirname.indexOf(path.join('packages', 'react-scripts', 'config')) !== -1) 
     nodePaths: nodePaths
   };
 }
-<<<<<<< HEAD
 */
 // @remove-on-eject-end
