@@ -1,6 +1,6 @@
 {
   "name": "@cliffedge/react-scripts",
-  "version": "0.6.4",
+  "version": "0.7.0",
   "description": "Configuration and scripts for Create React App.",
   "repository": "eXtreme/create-react-app",
   "license": "BSD-3-Clause",
@@ -67,6 +67,7 @@
     "react-addons-test-utils": "^15.3.2",
     "react-css-modules": "^3.7.10",
     "react-dev-utils": "^0.4.2",
+    "react-hot-loader": "next",
     "recursive-readdir": "2.1.0",
     "strip-ansi": "3.0.1",
     "strip-loader": "^0.1.2",

@@ -1,8 +1,4 @@
 {
   "presets": ["react-app"],
-  "env": {
-    "production": {
-      "plugins": ["transform-remove-console"]
-    }
-  }
+  "plugins": ["react-hot-loader/babel"]
 }

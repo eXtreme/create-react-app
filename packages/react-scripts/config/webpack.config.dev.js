@@ -47,6 +47,7 @@ module.exports = {
   // This means they will be the "root" imports that are included in JS bundle.
   // The first two entry points enable "hot" CSS and auto-refreshes for JS.
   entry: [
+    'react-hot-loader/patch',
     // Include an alternative client for WebpackDevServer. A client's job is to
     // connect to WebpackDevServer by a socket and get notified about changes.
     // When you save a file, the client will either apply hot updates (in case
@@ -154,6 +155,7 @@ module.exports = {
           // @remove-on-eject-begin
           babelrc: false,
           presets: [require.resolve('babel-preset-react-app')],
+          plugins: ["react-hot-loader/babel"],
           // @remove-on-eject-end
           // This is a feature of `babel-loader` for webpack (not Babel itself).
           // It enables caching results in ./node_modules/.cache/babel-loader/

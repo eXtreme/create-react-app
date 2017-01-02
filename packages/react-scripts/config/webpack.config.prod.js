@@ -160,6 +160,7 @@ module.exports = {
         query: {
           babelrc: false,
           presets: [require.resolve('babel-preset-react-app')],
+          plugins: ["transform-remove-console"]
         },
         // @remove-on-eject-end
       },
