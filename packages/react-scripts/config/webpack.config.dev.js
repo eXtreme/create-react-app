@@ -14,6 +14,7 @@ const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
 const nesting = require('postcss-nesting');
+const reporter = require('postcss-reporter');
 const cssvariables = require('postcss-css-variables');
 const values = require('postcss-modules-values');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -231,6 +232,7 @@ module.exports = {
               plugins: () => [
                 nesting,
                 cssvariables,
+                values,
                 require('postcss-flexbugs-fixes'),
                 autoprefixer({
                   browsers: [
@@ -241,7 +243,7 @@ module.exports = {
                   ],
                   flexbox: 'no-2009',
                 }),
-                values
+                reporter
               ],
             },
           },

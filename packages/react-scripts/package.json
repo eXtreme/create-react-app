@@ -1,6 +1,6 @@
 {
   "name": "@cliffedge/react-scripts",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Configuration and scripts for Create React App.",
   "repository": "eXtreme/create-react-app",
   "license": "BSD-3-Clause",
@@ -59,6 +59,7 @@
     "postcss-loader": "2.0.5",
     "postcss-modules-values": "^1.3.0",
     "postcss-nesting": "^4.0.1",
+    "postcss-reporter": "^3.0.0",
     "promise": "7.1.1",
     "react-addons-test-utils": "^15.3.2",
     "react-css-modules": "^3.7.10",
