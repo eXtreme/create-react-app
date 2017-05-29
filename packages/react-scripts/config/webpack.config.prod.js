@@ -202,6 +202,47 @@ module.exports = {
       },
       {
         test: /\.pcss/,
+        use: ExtractTextPlugin.extract(
+          Object.assign(
+            {
+              fallback: require.resolve('style-loader'),
+              use: [
+                {
+                  loader: require.resolve('css-loader'),
+                  options: {
+                    modules: true,
+                    importLoaders: 1,
+                    minimize: true,
+                    sourceMap: true,
+                    localIdentName: '[name]__[local]___[hash:base64:6]'
+                  },
+                },
+                {
+                  loader: require.resolve('postcss-loader'),
+                  options: {
+                    ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+                    plugins: () => [
+                      nesting,
+                      cssvariables,
+                      require('postcss-flexbugs-fixes'),
+                      autoprefixer({
+                        browsers: [
+                          '>1%',
+                          'last 4 versions',
+                          'Firefox ESR',
+                          'not ie < 9', // React doesn't support IE8 anyway
+                        ],
+                        flexbox: 'no-2009',
+                      }),
+                      values
+                    ],
+                  },
+                },
+              ],
+            },
+            extractTextPluginOptions
+          )
+        ),
         loader: ExtractTextPlugin.extract('style', 'css?importLoaders=1&modules!postcss')
       },
       // The notation here is somewhat confusing.
@@ -236,8 +277,6 @@ module.exports = {
                   options: {
                     ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
                     plugins: () => [
-                      nesting,
-                      cssvariables,
                       require('postcss-flexbugs-fixes'),
                       autoprefixer({
                         browsers: [
@@ -248,7 +287,6 @@ module.exports = {
                         ],
                         flexbox: 'no-2009',
                       }),
-                      values
                     ],
                   },
                 },
@@ -274,8 +312,7 @@ module.exports = {
             options: {
               ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
               plugins: () => [
-                nesting,
-                cssvariables,
+                require('postcss-flexbugs-fixes'),
                 autoprefixer({
                   browsers: [
                     '>1%',
@@ -283,8 +320,8 @@ module.exports = {
                     'Firefox ESR',
                     'not ie < 9', // React doesn't support IE8 anyway
                   ],
+                  flexbox: 'no-2009',
                 }),
-                values
               ],
             },
           },

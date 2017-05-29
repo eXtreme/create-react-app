@@ -209,25 +209,19 @@ module.exports = {
       },
       {
         test: /\.pcss$/,
-        loaders: [
-          'style?sourceMap',
-          'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
-          'postcss'
-        ]
-      },
-      // "postcss" loader applies autoprefixer to our CSS.
-      // "css" loader resolves paths in CSS and adds assets as dependencies.
-      // "style" loader turns CSS into JS modules that inject <style> tags.
-      // In production, we use a plugin to extract that CSS to a file, but
-      // in development "style" loader enables hot editing of CSS.
-      {
-        test: /\.css$/,
         use: [
-          require.resolve('style-loader'),
+          {
+            loader: require.resolve('style-loader'),
+            options: {
+              sourceMap: true
+            }
+          },
           {
             loader: require.resolve('css-loader'),
             options: {
+              modules: true,
               importLoaders: 1,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
             },
           },
           {
@@ -251,6 +245,41 @@ module.exports = {
               ],
             },
           },
+        ]
+      },
+      // "postcss" loader applies autoprefixer to our CSS.
+      // "css" loader resolves paths in CSS and adds assets as dependencies.
+      // "style" loader turns CSS into JS modules that inject <style> tags.
+      // In production, we use a plugin to extract that CSS to a file, but
+      // in development "style" loader enables hot editing of CSS.
+      {
+        test: /\.css$/,
+        use: [
+          require.resolve('style-loader'),
+          {
+            loader: require.resolve('css-loader'),
+            options: {
+              importLoaders: 1,
+            },
+          },
+          {
+            loader: require.resolve('postcss-loader'),
+            options: {
+              ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+              plugins: () => [
+                require('postcss-flexbugs-fixes'),
+                autoprefixer({
+                  browsers: [
+                    '>1%',
+                    'last 4 versions',
+                    'Firefox ESR',
+                    'not ie < 9', // React doesn't support IE8 anyway
+                  ],
+                  flexbox: 'no-2009',
+                }),
+              ],
+            },
+          },
         ],
       },
       {
@@ -268,8 +297,7 @@ module.exports = {
             options: {
               ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
               plugins: () => [
-                nesting,
-                cssvariables,
+                require('postcss-flexbugs-fixes'),
                 autoprefixer({
                   browsers: [
                     '>1%',
@@ -277,8 +305,8 @@ module.exports = {
                     'Firefox ESR',
                     'not ie < 9', // React doesn't support IE8 anyway
                   ],
+                  flexbox: 'no-2009',
                 }),
-                values
               ],
             },
           },
