@@ -1,6 +1,6 @@
 {
   "name": "@cliffedge/react-scripts",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Configuration and scripts for Create React App.",
   "repository": "eXtreme/create-react-app",
   "license": "BSD-3-Clause",
@@ -54,6 +54,7 @@
     "less-loader": "^2.2.3",
     "object-assign": "4.1.1",
     "path-exists": "2.1.0",
+    "postcss-cssnext": "^2.11.0",
     "postcss-css-variables": "^0.7.0",
     "postcss-flexbugs-fixes": "3.0.0",
     "postcss-loader": "2.0.5",
