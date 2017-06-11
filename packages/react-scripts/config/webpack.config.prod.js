@@ -254,39 +254,46 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
+        loader: ExtractTextPlugin.extract(
+          Object.assign(
+            {
+              fallback: require.resolve('style-loader'),
+              use: [
+                {
+                  loader: 'css-loader',
+                  options: {
+                    importLoaders: 1,
+                  },
+                },
+                {
+                  loader: 'postcss-loader',
+                  options: {
+                    ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+                    plugins: () => [
+                      require('postcss-flexbugs-fixes'),
+                      autoprefixer({
+                        browsers: [
+                          '>1%',
+                          'last 4 versions',
+                          'Firefox ESR',
+                          'not ie < 9', // React doesn't support IE8 anyway
+                        ],
+                        flexbox: 'no-2009',
+                      }),
+                    ],
+                  },
+                },
+                {
+                  loader: 'less-loader',
+                  options: {
+                    noIeCompat: 1,
+                  },
+                },
+              ]
             },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-              plugins: () => [
-                require('postcss-flexbugs-fixes'),
-                autoprefixer({
-                  browsers: [
-                    '>1%',
-                    'last 4 versions',
-                    'Firefox ESR',
-                    'not ie < 9', // React doesn't support IE8 anyway
-                  ],
-                  flexbox: 'no-2009',
-                }),
-              ],
-            },
-          },
-          {
-            loader: 'less-loader',
-            options: {
-              noIeCompat: 1,
-            },
-          },
-        ]
+            extractTextPluginOptions
+          )
+        ),
       },
       {
         test: /\.pcss/,
@@ -312,9 +319,8 @@ module.exports = {
                     plugins: () => [
                       require('postcss-import')({ addDependencyTo: webpack }),
                       require('postcss-url'),
-                      require('postcss-cssnext'),
                       require('postcss-flexbugs-fixes'),
-                      autoprefixer({
+                      require('postcss-cssnext')({
                         browsers: [
                           '>1%',
                           'last 4 versions',
@@ -331,7 +337,6 @@ module.exports = {
             extractTextPluginOptions
           )
         ),
-        loader: ExtractTextPlugin.extract('style', 'css?importLoaders=1&modules!postcss')
       },
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "file" loader exclusion list.

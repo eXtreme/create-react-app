@@ -303,9 +303,8 @@ module.exports = {
               plugins: () => [
                 require('postcss-import')({ addDependencyTo: webpack }),
                 require('postcss-url'),
-                require('postcss-cssnext'),
                 require('postcss-flexbugs-fixes'),
-                autoprefixer({
+                require('postcss-cssnext')({
                   browsers: [
                     '>1%',
                     'last 4 versions',
