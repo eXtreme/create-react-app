@@ -222,8 +222,9 @@ module.exports = {
                   options: {
                     ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
                     plugins: () => [
-                      nesting,
-                      cssvariables,
+                      require('postcss-import')({ addDependencyTo: webpack }),
+                      require('postcss-url'),
+                      require('postcss-cssnext'),
                       require('postcss-flexbugs-fixes'),
                       autoprefixer({
                         browsers: [
@@ -234,7 +235,6 @@ module.exports = {
                         ],
                         flexbox: 'no-2009',
                       }),
-                      values
                     ],
                   },
                 },
