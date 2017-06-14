@@ -37,10 +37,10 @@ module.exports = (resolve, rootDir, isEjecting) => {
         ? '<rootDir>/node_modules/babel-jest'
         : resolve('config/jest/babelTransform.js'),
       '^.+\\.css$': resolve('config/jest/cssTransform.js'),
-      // '^.+\\.pcss$': resolve('config/jest/pcssTransform.js'),
+      '^.+\\.pcss$': resolve('config/jest/pcssTransform.js'),
       '^(?!.*\\.(js|jsx|css|json|pcss)$)': resolve('config/jest/fileTransform.js'),
     },
-    transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
+    transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$','^.+\\.pcss$'],
     moduleNameMapper: {
       '^react-native$': 'react-native-web',
       "^.+\\.pcss$": "identity-obj-proxy"
