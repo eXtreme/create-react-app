@@ -36,6 +36,26 @@ const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
+const postCSSLoaderOptions = {
+  ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+  plugins: () => [
+    require('postcss-import')({ addDependencyTo: webpack }),
+    require('postcss-url'),
+    require('postcss-flexbugs-fixes'),
+    require('postcss-cssnext')({
+      browsers: [
+        '>1%',
+        'last 4 versions',
+        'Firefox ESR',
+        'not ie < 9', // React doesn't support IE8 anyway
+      ],
+      flexbox: 'no-2009',
+    }),
+    require('postcss-browser-reporter'),
+    require('postcss-reporter'),
+  ],
+};
+
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
 // The production configuration is different and lives in a separate file.
@@ -220,6 +240,7 @@ module.exports = {
       // in development "style" loader enables hot editing of CSS.
       {
         test: /\.css$/,
+        exclude: /\.module\.css$/,
         use: [
           require.resolve('style-loader'),
           {
@@ -246,6 +267,24 @@ module.exports = {
               ],
             },
           },
+        ],
+      },
+      {
+        test: /\.module\.css$/,
+        use: [
+          require.resolve('style-loader'),
+          {
+            loader: require.resolve('css-loader'),
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+            },
+          },
+          {
+            loader: require.resolve('postcss-loader'),
+            options: postCSSLoaderOptions
+          }
         ],
       },
       {
@@ -303,25 +342,7 @@ module.exports = {
           },
           {
             loader: require.resolve('postcss-loader'),
-            options: {
-              ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-              plugins: () => [
-                require('postcss-import')({ addDependencyTo: webpack }),
-                require('postcss-url'),
-                require('postcss-flexbugs-fixes'),
-                require('postcss-cssnext')({
-                  browsers: [
-                    '>1%',
-                    'last 4 versions',
-                    'Firefox ESR',
-                    'not ie < 9', // React doesn't support IE8 anyway
-                  ],
-                  flexbox: 'no-2009',
-                }),
-                require('postcss-browser-reporter'),
-                require('postcss-reporter'),
-              ],
-            },
+            options: postCSSLoaderOptions
           },
         ]
       },

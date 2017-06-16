@@ -40,10 +40,15 @@ module.exports = (resolve, rootDir, isEjecting) => {
       // '^.+\\.pcss$': resolve('config/jest/pcssTransform.js'),
       '^(?!.*\\.(js|jsx|css|json|pcss)$)': resolve('config/jest/fileTransform.js'),
     },
-    transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$','^.+\\.pcss$'],
+    transformIgnorePatterns: [
+      '[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$',
+      '^.+\\.module\\.css$',
+      '^.+\\.pcss$'
+    ],
     moduleNameMapper: {
       '^react-native$': 'react-native-web',
-      "\\.pcss$": "identity-obj-proxy"
+      "\\.pcss$": "identity-obj-proxy",
+      '^.+\\.module\\.css$': 'identity-obj-proxy',
     },
   };
   if (rootDir) {

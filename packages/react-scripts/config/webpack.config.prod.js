@@ -58,6 +58,26 @@ const extractTextPluginOptions = shouldUseRelativeAssetPaths
     { publicPath: Array(cssFilename.split('/').length).join('../') }
   : {};
 
+const postCSSLoaderOptions = {
+  ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+  plugins: () => [
+    require('postcss-import')({ addDependencyTo: webpack }),
+    require('postcss-url'),
+    require('postcss-flexbugs-fixes'),
+    require('postcss-cssnext')({
+      browsers: [
+        '>1%',
+        'last 4 versions',
+        'Firefox ESR',
+        'not ie < 9', // React doesn't support IE8 anyway
+      ],
+      flexbox: 'no-2009',
+    }),
+    require('postcss-browser-reporter'),
+    require('postcss-reporter'),
+  ],
+};
+
 // This is the production configuration.
 // It compiles slowly and is focused on producing a fast and minimal bundle.
 // The development configuration is different and lives in a separate file.
@@ -219,6 +239,7 @@ module.exports = {
       // in the main CSS file.
       {
         test: /\.css$/,
+        exclude: /\.module\.css$/,
         loader: ExtractTextPlugin.extract(
           Object.assign(
             {
@@ -256,6 +277,33 @@ module.exports = {
           )
         ),
         // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+      },
+      {
+        test: /\.module\.css/,
+        use: ExtractTextPlugin.extract(
+          Object.assign(
+            {
+              fallback: require.resolve('style-loader'),
+              use: [
+                {
+                  loader: require.resolve('css-loader'),
+                  options: {
+                    modules: true,
+                    importLoaders: 1,
+                    minimize: true,
+                    sourceMap: true,
+                    localIdentName: '[name]__[local]___[hash:base64:6]'
+                  },
+                },
+                {
+                  loader: require.resolve('postcss-loader'),
+                  options: postCSSLoaderOptions
+                },
+              ],
+            },
+            extractTextPluginOptions
+          )
+        ),
       },
       {
         test: /\.less$/,
@@ -319,23 +367,7 @@ module.exports = {
                 },
                 {
                   loader: require.resolve('postcss-loader'),
-                  options: {
-                    ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-                    plugins: () => [
-                      require('postcss-import')({ addDependencyTo: webpack }),
-                      require('postcss-url'),
-                      require('postcss-flexbugs-fixes'),
-                      require('postcss-cssnext')({
-                        browsers: [
-                          '>1%',
-                          'last 4 versions',
-                          'Firefox ESR',
-                          'not ie < 9', // React doesn't support IE8 anyway
-                        ],
-                        flexbox: 'no-2009',
-                      }),
-                    ],
-                  },
+                  options: postCSSLoaderOptions
                 },
               ],
             },
