@@ -89,6 +89,7 @@ module.exports = {
   devtool: 'source-map',
   // In production, we only want to load the polyfills and the app code.
   entry: [require.resolve('./polyfills'), paths.appIndexJs],
+  context: paths.appSrc,
   output: {
     // The build folder.
     path: paths.appBuild,
@@ -292,7 +293,7 @@ module.exports = {
                     importLoaders: 1,
                     minimize: true,
                     sourceMap: true,
-                    localIdentName: '[name]__[local]___[hash:base64:6]'
+                    localIdentName: '[path]___[name]__[local]___[hash:base64:5]'
                   },
                 },
                 {
@@ -362,7 +363,7 @@ module.exports = {
                     importLoaders: 1,
                     minimize: true,
                     sourceMap: true,
-                    localIdentName: '[name]__[local]___[hash:base64:6]'
+                    localIdentName: '[path]___[name]__[local]___[hash:base64:5]'
                   },
                 },
                 {

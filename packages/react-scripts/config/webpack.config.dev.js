@@ -66,6 +66,7 @@ module.exports = {
   // These are the "entry points" to our application.
   // This means they will be the "root" imports that are included in JS bundle.
   // The first two entry points enable "hot" CSS and auto-refreshes for JS.
+  context: paths.appSrc,
   entry: [
     'babel-polyfill',
     'react-hot-loader/patch',
@@ -278,7 +279,7 @@ module.exports = {
             options: {
               modules: true,
               importLoaders: 1,
-              localIdentName: '[name]__[local]___[hash:base64:5]'
+              localIdentName: '[path]___[name]__[local]___[hash:base64:5]'
             },
           },
           {
@@ -337,7 +338,7 @@ module.exports = {
             options: {
               modules: true,
               importLoaders: 1,
-              localIdentName: '[name]__[local]___[hash:base64:5]'
+              localIdentName: '[path]___[name]__[local]___[hash:base64:5]'
             },
           },
           {

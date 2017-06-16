@@ -14,6 +14,6 @@ module.exports = babelJest.createTransformer({
   presets: [require.resolve('babel-preset-react-app')],
   babelrc: false,
   plugins: [
-    require.resolve('react-css-modules')
+    require.resolve('babel-plugin-react-css-modules')
   ]
 });
