@@ -200,7 +200,12 @@ module.exports = {
           // @remove-on-eject-begin
           babelrc: false,
           presets: [require.resolve('babel-preset-react-app')],
-          plugins: ["react-hot-loader/babel"],
+          plugins: [
+            "react-hot-loader/babel",
+            [
+              'react-css-modules', { context: paths.appSrc, webpackHotModuleReloading: true }
+            ]
+          ],
           // @remove-on-eject-end
           // This is a feature of `babel-loader` for webpack (not Babel itself).
           // It enables caching results in ./node_modules/.cache/babel-loader/

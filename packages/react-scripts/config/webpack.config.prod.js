@@ -196,7 +196,12 @@ module.exports = {
         options: {
           babelrc: false,
           presets: [require.resolve('babel-preset-react-app')],
-          plugins: ["transform-remove-console"]
+          plugins: [
+            "transform-remove-console",
+            [
+              'react-css-modules', { context: paths.appSrc }
+            ]
+          ]
         },
         // @remove-on-eject-end
       },

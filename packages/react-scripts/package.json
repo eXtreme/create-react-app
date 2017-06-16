@@ -1,6 +1,6 @@
 {
   "name": "@cliffedge/react-scripts",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Configuration and scripts for Create React App.",
   "repository": "eXtreme/create-react-app",
   "license": "BSD-3-Clause",
@@ -26,6 +26,7 @@
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
     "babel-loader": "7.0.0",
+    "babel-plugin-react-css-modules": "^2.8.0",
     "babel-plugin-transform-remove-console": "^6.8.0",
     "babel-polyfill": "^6.20.0",
     "babel-preset-react-app": "^3.0.0",
@@ -67,7 +68,6 @@
     "postcss-url": "^7.0.0",
     "promise": "7.1.1",
     "react-addons-test-utils": "^15.3.2",
-    "react-css-modules": "^3.7.10",
     "react-dev-utils": "^3.0.0",
     "react-error-overlay": "^1.0.7",
     "react-hot-loader": "next",
