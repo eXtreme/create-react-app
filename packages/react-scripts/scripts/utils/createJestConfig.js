@@ -50,6 +50,7 @@ module.exports = (resolve, rootDir, isEjecting) => {
       "\\.pcss$": "identity-obj-proxy",
       '^.+\\.module\\.css$': 'identity-obj-proxy',
     },
+    moduleFileExtensions: ['web.js', 'js', 'json', 'web.jsx', 'jsx'],
   };
   if (rootDir) {
     config.rootDir = rootDir;
