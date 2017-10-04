@@ -1,6 +1,6 @@
 {
   "name": "@cliffedge/react-scripts",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Configuration and scripts for Create React App.",
   "repository": "eXtreme/create-react-app",
   "license": "BSD-3-Clause",
@@ -36,7 +36,8 @@
     "css-loader": "0.28.4",
     "detect-port": "1.1.1",
     "dotenv": "4.0.0",
-    "enzyme": "^2.5.1",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.0.1",
     "eslint": "4.4.1",
     "eslint-config-react-app": "^2.0.0",
     "eslint-loader": "1.9.0",
