@@ -1,6 +1,6 @@
 {
   "name": "@cliffedge/react-scripts",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Configuration and scripts for Create React App.",
   "repository": "eXtreme/create-react-app",
   "license": "BSD-3-Clause",
@@ -68,7 +68,6 @@
     "postcss-reporter":"^4.0.0",
     "postcss-url": "^7.0.0",
     "promise": "8.0.1",
-    "react-addons-test-utils": "^15.3.2",
     "react-dev-utils": "^3.1.0",
     "react-error-overlay": "^1.0.10",
     "react-hot-loader": "next",
