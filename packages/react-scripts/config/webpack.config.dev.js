@@ -360,6 +360,7 @@ module.exports = {
           // extensions .module.less
           {
             test: lessRegex,
+            include: /node_modules/,
             exclude: lessModuleRegex,
             use: getStyleLoaders({ importLoaders: 2 }, 'less-loader'),
           },
@@ -367,6 +368,7 @@ module.exports = {
           // using the extension .module.less
           {
             test: lessModuleRegex,
+            include: /node_modules/,
             use: getStyleLoaders(
               {
                 importLoaders: 2,
@@ -386,7 +388,7 @@ module.exports = {
             // its runtime that would otherwise be processed through "file" loader.
             // Also exclude `html` and `json` extensions so they get processed
             // by webpacks internal loaders.
-            exclude: [/\.(js|jsx)$/, /\.html$/, /\.json$/],
+            exclude: [/\.(config|overrides|variables)$/, /\.(js|jsx)$/, /\.html$/, /\.json$/],
             loader: require.resolve('file-loader'),
             options: {
               name: 'static/media/[name].[hash:8].[ext]',
