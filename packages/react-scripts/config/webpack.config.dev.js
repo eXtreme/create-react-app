@@ -105,6 +105,7 @@ module.exports = {
     // changing JS code would still trigger a refresh.
   ],
   output: {
+    globalObject: 'this',
     // Add /* filename */ comments to generated require()s in the output.
     pathinfo: true,
     // This does not produce a real file. It's just the virtual path that is

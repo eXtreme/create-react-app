@@ -116,6 +116,7 @@ module.exports = {
   // In production, we only want to load the app code.
   entry: [paths.appIndexJs],
   output: {
+    globalObject: 'this',
     // The build folder.
     path: paths.appBuild,
     // Generated JS file names (with nested folders).
