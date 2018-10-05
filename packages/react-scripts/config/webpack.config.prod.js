@@ -439,7 +439,10 @@ module.exports = {
           // extensions .module.less
           {
             test: lessRegex,
-            include: /node_modules/,
+            include: [
+              paths.appSrc,
+              /node_modules\/semantic-ui-less/,
+            ],
             exclude: lessModuleRegex,
             loader: getStyleLoaders(
               {
@@ -458,7 +461,6 @@ module.exports = {
           // using the extension .module.less
           {
             test: lessModuleRegex,
-            include: /node_modules/,
             loader: getStyleLoaders(
               {
                 importLoaders: 2,
